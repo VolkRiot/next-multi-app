@@ -10,6 +10,9 @@ module.exports = (phase, { defaultConfig }) => {
   return {
     assetPrefix: '/base',
     useFileSystemPublicRoutes: false,
+    env: {
+      githubToken: process.env.GITHUB_GRAPH_API_TOKEN,
+    },
     target: 'server',
     reactStrictMode: true,
     experimental: {

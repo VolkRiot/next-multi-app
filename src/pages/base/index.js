@@ -5,17 +5,22 @@ import gql from 'graphql-tag';
 import { withApollo } from '../../withApollo';
 
 export const ALL_POSTS_QUERY = gql`
-  query {
+  query($number_of_repos: Int!) {
     viewer {
       login
+      name
+      repositories(last: $number_of_repos) {
+        nodes {
+          name
+        }
+      }
     }
   }
 `;
 
-// export const allPostsQueryVars = {
-//   skip: 0,
-//   first: 10,
-// };
+export const numberReposQueryVars = {
+  number_of_repos: 5,
+};
 
 // function simpleIndex() {
 //   debugger;
@@ -26,7 +31,7 @@ function Index(props) {
   const { loading, error, data, fetchMore, networkStatus } = useQuery(
     ALL_POSTS_QUERY,
     {
-      // variables: allPostsQueryVars,
+      variables: numberReposQueryVars,
       // Setting this value to true will make the component rerender when
       // the "networkStatus" changes, so we are able to know if it is fetching
       // more data
@@ -34,14 +39,13 @@ function Index(props) {
     }
   );
 
-  // debugger;
   if (loading) return <div>Loading</div>;
 
-  const { viewer } = data;
+  // const { viewer } = data;
 
   return (
     <div>
-      <p>{`Github User data for user ${viewer.login}`}</p>
+      {data && <p>{`Github User data for user ${data.viewer.login}`}</p>}
     </div>
     // <ul>
     //   <li>
@@ -60,4 +64,4 @@ function Index(props) {
 
 // export default simpleIndex;
 
-export default withApollo({ ssr: true })(Index);
+export default withApollo({ ssr: false })(Index);

@@ -9,13 +9,14 @@ export default function createApolloClient(
 ): ApolloClient<any> {
   // The `ctx` (NextPageContext) will only be present on the server.
   // use it to extract auth headers (ctx.req) or similar.
+
   return new ApolloClient({
     ssrMode: !!ctx,
     link: new HttpLink({
       uri: 'https://api.github.com/graphql', // Server URL (must be absolute)
       credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
       headers: {
-        authorization: `Bearer ${process.env.GITHUB_GRAPH_API_TOKEN}`,
+        authorization: `Bearer ${process.env.githubToken}`,
       },
     }),
     cache: new InMemoryCache().restore(initialState),
