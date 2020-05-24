@@ -1,1 +1,1 @@
-# Custom NextJS build demo for experimantation.
+# Custom NextJS build demo for experimentation.
