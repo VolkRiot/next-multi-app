@@ -8,7 +8,7 @@ module.exports = (phase, { defaultConfig }) => {
   // }
 
   return {
-    assetPrefix: '/base',
+    assetPrefix: '/example',
     useFileSystemPublicRoutes: false,
     env: {
       githubToken: process.env.GITHUB_GRAPH_API_TOKEN,

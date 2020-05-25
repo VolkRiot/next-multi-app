@@ -11,18 +11,8 @@ app.prepare().then(() => {
   const server = new Koa();
   const router = new Router();
 
-  router.get('/base', async (ctx) => {
-    await app.render(ctx.req, ctx.res, '/base', ctx.query);
-    ctx.respond = false;
-  });
-
-  router.get('/base/a', async (ctx) => {
-    await app.render(ctx.req, ctx.res, '/base/a', ctx.query);
-    ctx.respond = false;
-  });
-
-  router.get('/base/b', async (ctx) => {
-    await app.render(ctx.req, ctx.res, '/base/b', ctx.query);
+  router.get('/example/apollo', async (ctx) => {
+    await app.render(ctx.req, ctx.res, '/example/apollo', ctx.query);
     ctx.respond = false;
   });
 
@@ -32,7 +22,7 @@ app.prepare().then(() => {
   });
 
   server.use(async (ctx, next) => {
-    ctx.path = ctx.path.replace('/base/_next', '/_next');
+    ctx.path = ctx.path.replace('/example/_next', '/_next');
     ctx.res.statusCode = 200;
     await next();
   });

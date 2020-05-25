@@ -13,6 +13,7 @@ import createApolloClient from './createApolloClient';
  */
 export const withApollo = ({ ssr = false } = {}) => (PageComponent) => {
   const WithApollo = ({ apolloClient, apolloState, ...pageProps }) => {
+    // debugger;
     let client;
     if (apolloClient) {
       // Happens on: getDataFromTree & next.js ssr
@@ -21,6 +22,8 @@ export const withApollo = ({ ssr = false } = {}) => (PageComponent) => {
       // Happens on: next.js csr
       client = initApolloClient(apolloState, undefined);
     }
+
+    // debugger;
 
     return (
       <ApolloProvider client={client}>
