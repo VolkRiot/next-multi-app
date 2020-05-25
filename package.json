@@ -14,12 +14,14 @@
     "apollo-client": "^2.6.10",
     "apollo-link-http": "^1.5.17",
     "backpack-core": "^0.8.4",
+    "bootstrap": "^4.5.0",
     "cross-env": "^5.2.0",
     "graphql": "^15.0.0",
     "graphql-tag": "^2.10.3",
     "koa": "^2.0.1",
     "next": "latest",
     "react": "^16.7.0",
+    "react-bootstrap": "^1.0.1",
     "react-dom": "^16.7.0"
   },
   "devDependencies": {

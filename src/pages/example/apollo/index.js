@@ -3,6 +3,11 @@ import { useQuery } from '@apollo/react-hooks';
 import { NetworkStatus } from 'apollo-client';
 import gql from 'graphql-tag';
 import { withApollo } from '../../../withApollo';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Table from 'react-bootstrap/Table';
+import Navbar from 'react-bootstrap/Navbar';
 
 export const ALL_POSTS_QUERY = gql`
   query($number_of_repos: Int!) {
@@ -36,6 +41,7 @@ function Index(props) {
 
   const { loading, error, data, fetchMore, networkStatus } = queryProps;
 
+  // If Apollo client is not set to SSR
   if (loading) return <div>Loading</div>;
 
   const {
@@ -43,36 +49,32 @@ function Index(props) {
   } = data;
 
   return (
-    <div>
-      <h1>{`Github User data for user ${login}`}</h1>
-      <h3>Repos Table</h3>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Repo Name</th>
-            <th>Primary Language</th>
-          </tr>
-        </thead>
-        <tbody>
-          {repositories.nodes.map((repo, index) => (
-            <tr key={index}>
-              <td>{repo.name}</td>
-              <td>{repo.primaryLanguage.name}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      {/* <table>
-        <thead>
-        {repositories.nodes.map((repo, index) => (
-          <li key={index}>
-            <div>{`Repo name ${repo.name}`}</div>
-          </li>
-        ))}
-      </table> */}
-    </div>
+    <>
+      <Navbar bg="dark" variant="dark" expand="lg">
+        <Navbar.Brand href="#home">{`Github Data for User ${login}`}</Navbar.Brand>
+      </Navbar>
+      <Container>
+        <h3>Repos Table</h3>
+        <Row>
+          <Table striped bordered hover variant="dark">
+            <thead>
+              <tr>
+                <th>Repo Name</th>
+                <th>Primary Language</th>
+              </tr>
+            </thead>
+            <tbody>
+              {repositories.nodes.map((repo, index) => (
+                <tr key={index}>
+                  <td>{repo.name}</td>
+                  <td>{repo.primaryLanguage.name}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </Row>
+      </Container>
+    </>
   );
 }
 
